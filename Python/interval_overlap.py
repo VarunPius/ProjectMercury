@@ -1,3 +1,7 @@
+"""
+`Down` intervals are when the system is down. We need output which doesnt subtracts down from all overlapping `up` intervals
+"""
+
 
 def process_intervals(intervals):
     up_interval = []
@@ -9,6 +13,7 @@ def process_intervals(intervals):
         else:
             down_interval = interval
     
+    print("Pre Processing:")
     print("Up Interval: ", up_interval)
     print("Down Interval: ", down_interval)
 
@@ -26,7 +31,7 @@ def process_intervals(intervals):
         elif up_i[0] < down_interval[0] and up_i[1] > down_interval[1]:
             print("inside", up_i)
             start, end = up_i[0], up_i[1]
-            #up_interval.remove(up_i)
+            #up_interval.remove(up_i)       # $$1
             up_low = [start, down_interval[0], "up"]
             up_high = [down_interval[1], end, "up"]
 
@@ -34,7 +39,7 @@ def process_intervals(intervals):
             results.append(up_high)
 
 
-    print("Post:")
+    print("Post Processing:")
     print("Up Interval: ", results)
     print("Down Interval: ", down_interval)
 
@@ -56,8 +61,8 @@ def main():
 main()
 
 """
-Initial intervals: [[0, 4, 'up'], [5, 9, 'up'], [4, 5, 'up'], [2, 7, 'up'], [3, 6, 'down']]
-
+Initial intervals:  [[0, 4, 'up'], [5, 9, 'up'], [4, 5, 'up'], [2, 7, 'up'], [3, 6, 'down']]
+Pre Processing:
 Up Interval:  [[0, 4, 'up'], [5, 9, 'up'], [4, 5, 'up'], [2, 7, 'up']]
 Down Interval:  [3, 6, 'down']
 ** [0, 4, 'up']
@@ -65,7 +70,10 @@ Down Interval:  [3, 6, 'down']
 ** [4, 5, 'up']
 ** [2, 7, 'up']
 inside [2, 7, 'up']
-Post:
+Post Processing:
 Up Interval:  [[0, 3, 'up'], [6, 9, 'up'], [2, 3, 'up'], [6, 7, 'up']]
 Down Interval:  [3, 6, 'down']
+
+$$1:
+Don't remove element from looping object. Causes error in count and may result in object exiting earlier than expected before processing all values.
 """
