@@ -15,12 +15,12 @@ def switch_screens() -> None:
     a random number of times.
     """
     max_switches = random.randint(1, 5)
-    pyautogui.keyDown('alt') 
+    pyautogui.keyDown('command')    # 'alt' for Windows
     
     for _ in range(1, max_switches):
         pyautogui.press('tab')     
      
-    pyautogui.keyUp('alt')   
+    pyautogui.keyUp('command')      # 'alt' for Windows
 
 
 def wiggle_mouse() -> None:
@@ -34,7 +34,7 @@ def wiggle_mouse() -> None:
         pyautogui.moveTo(
             x=coords[0], 
             y=coords[1],
-            duration=5
+            duration=1              # duration the cursor moves
         )
         time.sleep(10)
     
